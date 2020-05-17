@@ -68,7 +68,7 @@
       <property name="title">
        <string>Directory selection</string>
       </property>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="browse_btn">
        <property name="geometry">
         <rect>
          <x>380</x>
@@ -97,7 +97,7 @@
         <enum>Qt::ScrollBarAlwaysOff</enum>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="build_btn">
        <property name="geometry">
         <rect>
          <x>290</x>
@@ -110,7 +110,7 @@
         <string>Build index</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="update_btn">
        <property name="geometry">
         <rect>
          <x>210</x>
@@ -124,7 +124,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QCommandLinkButton" name="commandLinkButton_2">
+     <widget class="QCommandLinkButton" name="reset_btn">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -137,7 +137,7 @@
        <string>Reset and cancel</string>
       </property>
      </widget>
-     <widget class="QCommandLinkButton" name="commandLinkButton">
+     <widget class="QCommandLinkButton" name="next_btn">
       <property name="geometry">
        <rect>
         <x>310</x>
