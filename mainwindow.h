@@ -9,6 +9,10 @@
 #include <QFile>
 #include <fstream>
 #include <QFileDialog>
+#include <QTimer>
+#include <QDebug>
+#include <QDirIterator>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -22,9 +26,10 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_2_clicked();
 
-    void on_pushButton_clicked();
+    void on_remove_btn_clicked();
+
+    void on_add_dir_btn_clicked();
 
     void on_reset_btn_clicked();
 
@@ -32,17 +37,17 @@ private slots:
 
     void on_build_btn_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_search_btn_clicked();
 
-    void on_pushButton_5_clicked();
+    void on_open_file_btn_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_save_btn_clicked();
 
-    void on_pushButton_7_clicked();
+    void on_load_btn_clicked();
 
-    void on_browse_btn_clicked();
+    void on_browse_dir_btn_clicked();
 
-    void on_pushButton_6_clicked();
+    void on_brwose_file_btn_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -51,8 +56,8 @@ private:
     string *arr_of_dirs ;
     bool HAS_BEEN_BUILT;
     unsigned short MAX_INDEX ;
-    QString WORD_USED ;
-    QString linear_search(string path,QString word);
+    string WORD_USED ;
+    QString linear_search(string path,string word_search);
     void process_from_directory(string path, map <int, string> &mapped_files, Trie &root);
 };
 #endif // MAINWINDOW_H

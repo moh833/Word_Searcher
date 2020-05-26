@@ -5,6 +5,7 @@
 #include <fstream>
 #include <memory.h>
 #include <map>
+#include <set>
 #include <vector>
 using namespace std;
 
@@ -24,11 +25,13 @@ public:
 
   vector <int> word_exist(char* str);
 
-  bool prefix_exist(char* str);
-
   void traverse(string word);
 
   void traverse_to_file(ofstream &save_file, string word);
+
+  Trie* prefix_exists(char* str);
+
+  set <int> traverse_prefix_search(set <int>& found_files, string word="");
 
 };
 

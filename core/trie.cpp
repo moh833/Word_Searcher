@@ -37,15 +37,6 @@
     return children[*str]->word_exist(str+1);
   }
 
-  bool Trie::prefix_exist(char* str){
-    if(*str == '\0')
-      return true;
-
-    if(children.count(*str) == 0)
-      return false;
-    return children[*str]->prefix_exist(str+1);
-  }
-
   void Trie::traverse(string word){
     if(!files.empty()){
       cout << word;
@@ -66,4 +57,28 @@
     }
     for(auto it=children.begin(); it!=children.end(); it++)
       it->second->traverse_to_file(save_file, word + it->first);
+  }
+
+
+  Trie* Trie::prefix_exists(char* str){
+    if(*str == '\0'){
+      return this;
+    }
+    if(children.count(*str) == 0)
+      return 0;
+    return children[*str]->prefix_exists(str+1);
+  }
+
+  set <int> Trie::traverse_prefix_search(set <int>& found_files, string word){
+    if(!files.empty()){
+      // copy(files.begin(),files.end(),std::inserter(found_files,found_files.end()));
+      found_files.insert(files.begin(),files.end());
+//      cout << word;
+//      for(auto it=files.begin(); it!=files.end(); it++)
+//        cout << " " << *it;
+//      cout << endl;
+    }
+    for(auto it=children.begin(); it!=children.end(); it++)
+      it->second->traverse_prefix_search(found_files, word + it->first);
+    return found_files;
   }
