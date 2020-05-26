@@ -195,6 +195,7 @@ void MainWindow::on_pushButton_6_clicked()
     ui->load_field->setText(filename);
 }
 void MainWindow::process_from_directory(string path, map <int, string> &mapped_files, Trie &root){
+    ui->progress->setValue(0);
     string str = path + "/*.*";
     QDir dir(QString::fromStdString(path));
     dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
@@ -217,5 +218,5 @@ void MainWindow::process_from_directory(string path, map <int, string> &mapped_f
     }
     }while(::FindNextFile(hFind, &fd));
     ::FindClose(hFind);
-    ui->out_tab1->append("Done !");
+    ui->out_tab1->setText("Done!");
 }
