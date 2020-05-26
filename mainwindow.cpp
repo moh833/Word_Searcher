@@ -11,16 +11,14 @@ MainWindow::MainWindow(QWidget *parent)
     arr_of_dirs = new string[100] ;
     HAS_BEEN_BUILT = 0 ;
     MAX_INDEX = 0;
-    PROGRESS_VAR_GLOBAL = 0 ;
-    NUMBER_OF_FILES = 0 ;
 }
-
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 void MainWindow::on_build_btn_clicked()
 {
+
     QString dir_s;
     QDir dir_;
     int NUM = ui->dir_info->currentIndex().row()+1 ;
@@ -39,10 +37,8 @@ void MainWindow::on_build_btn_clicked()
             delete ui->dir_info->selectedItems()[0] ;
             MAX_INDEX++ ;
         }
-        ui->out_tab1->clear() ;
         ui->out_tab1->append("Index built succefully") ;
         HAS_BEEN_BUILT = 1;
-        //timer->stop();
     }
 }
 void MainWindow::on_pushButton_2_clicked()
@@ -198,4 +194,28 @@ void MainWindow::on_pushButton_6_clicked()
     QString filename=QFileDialog::getOpenFileName(this,tr("Select file"),QDir::currentPath()+"/saved","Text file (*.txt)");
     ui->load_field->setText(filename);
 }
+void MainWindow::process_from_directory(string path, map <int, string> &mapped_files, Trie &root){
+    string str = path + "/*.*";
+    QDir dir(QString::fromStdString(path));
+    dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
+    unsigned int NUM = dir.count() ;
+    wstring widestr = std::wstring(str.begin(), str.end());
+    const wchar_t* search_path = widestr.c_str();
 
+    WIN32_FIND_DATA fd;
+    HANDLE hFind = ::FindFirstFile(search_path, &fd);
+    int file_id = 1;
+    do {
+    if(! (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) ) {
+       if (NUM%(NUM/file_id) == 0){
+           ui->progress->setValue(100*file_id/NUM);
+        }
+      wstring ws(fd.cFileName);
+      string file_name(ws.begin(), ws.end());
+      mapped_files[file_id] = file_name;
+      process_file(path + '\\' + file_name, root, file_id++);
+    }
+    }while(::FindNextFile(hFind, &fd));
+    ::FindClose(hFind);
+    ui->out_tab1->append("Done !");
+}

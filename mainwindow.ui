@@ -318,20 +318,17 @@ border-radius:10px;</string>
         <string>Save built trie</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_8">
+      <widget class="QProgressBar" name="progress">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>10</x>
          <y>210</y>
-         <width>75</width>
-         <height>23</height>
+         <width>151</width>
+         <height>21</height>
         </rect>
        </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string>PushButton</string>
+       <property name="value">
+        <number>0</number>
        </property>
       </widget>
      </widget>

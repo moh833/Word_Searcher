@@ -16,7 +16,7 @@ using namespace std;
 
 void process_file(string path, Trie &root, int file_id);
 
-void process_from_directory(string path, map <int, string> &mapped_files, Trie &root);
+//void process_from_directory(string path, map <int, string> &mapped_files, Trie &root);
 
 void save_to_file(string directory, map<int, string> mapped_files, Trie root, string file_path);
 

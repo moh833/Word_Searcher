@@ -9,7 +9,6 @@
 #include <QFile>
 #include <fstream>
 #include <QFileDialog>
-#include <QTimer>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -54,7 +53,6 @@ private:
     unsigned short MAX_INDEX ;
     QString WORD_USED ;
     QString linear_search(string path,QString word);
-    unsigned int PROGRESS_VAR_GLOBAL ;
-    unsigned int NUMBER_OF_FILES ;
+    void process_from_directory(string path, map <int, string> &mapped_files, Trie &root);
 };
 #endif // MAINWINDOW_H

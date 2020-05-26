@@ -22,7 +22,7 @@ void process_file(string path, Trie &root, int file_id){
 }
 // takes directory path, empty map, root
 // creates trie root and mapped_files which maps from file_id to file_name
-void process_from_directory(string path, map <int, string> &mapped_files, Trie &root){
+/*void process_from_directory(string path, map <int, string> &mapped_files, Trie &root){
     string str = path + "/*.*";
     QDir dir(QString::fromStdString(path));
     dir.setFilter( QDir::AllEntries | QDir::NoDotAndDotDot );
@@ -43,6 +43,7 @@ void process_from_directory(string path, map <int, string> &mapped_files, Trie &
     ::FindClose(hFind);
 
 }
+*/
 // takes the path of the directory to save, mapped files, the root of the trie and a file_path to be created
 // creates file_path file with all the data
 void save_to_file(string directory, map<int, string> mapped_files, Trie root, string file_path){
