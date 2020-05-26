@@ -218,5 +218,6 @@ void MainWindow::process_from_directory(string path, map <int, string> &mapped_f
     }
     }while(::FindNextFile(hFind, &fd));
     ::FindClose(hFind);
+    ui->progress->setValue(100);
     ui->out_tab1->setText("Done!");
 }
