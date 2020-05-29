@@ -56,6 +56,7 @@ private:
     string *arr_of_dirs ;
     bool HAS_BEEN_BUILT;
     unsigned short MAX_INDEX ;
+    unsigned short NUM_DIRS;
     string WORD_USED ;
     QString linear_search(string path,string word_search);
     void process_from_directory(string path, map <int, string> &mapped_files, Trie &root);

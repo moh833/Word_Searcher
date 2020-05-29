@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     arr_of_dirs = new string[100] ;
     HAS_BEEN_BUILT = 0 ;
     MAX_INDEX = 0;
+    NUM_DIRS = 0;
 }
 
 MainWindow::~MainWindow()
@@ -19,11 +20,9 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_build_btn_clicked()
 {
-    ui->out_tab1->append("got in");
     QString dir_s;
 
-    int NUM = ui->dir_info->currentIndex().row()+1 ;
-    if (NUM > 100){
+    if (NUM_DIRS > 100){
         ui->out_tab1->setText("You can't add more than 100 directories");
     }
     else if (ui->dir_info->selectedItems().isEmpty()){
@@ -35,7 +34,7 @@ void MainWindow::on_build_btn_clicked()
             dir_s =(ui->dir_info->selectedItems()[0]->text(0));
 
             ui->out_tab1->setText("Processing " + dir_s);
-            ui->out_tab1->append("Directory " + QString::number(dir_i) + "/" + QString::number(NUM));
+            ui->out_tab1->append("Directory " + QString::number(dir_i) + "/" + QString::number(NUM_DIRS));
 
             arr_of_dirs[MAX_INDEX] = dir_s.toStdString();
             process_from_directory(dir_s.toStdString(),arr_of_maps[MAX_INDEX],arr_of_tries[MAX_INDEX]);
@@ -55,6 +54,7 @@ void MainWindow::on_remove_btn_clicked()
          ui->out_tab1->setText("Empty list, invalid operation");
      }else{
          delete ui->dir_info->selectedItems()[0] ;
+         NUM_DIRS--;
      }
 }
 void MainWindow::on_add_dir_btn_clicked()
@@ -79,6 +79,7 @@ void MainWindow::on_add_dir_btn_clicked()
         // item->setText(0,ui->dir_include->toPlainText());
         item->setText(0,dir.path());
         ui->dir_info->setCurrentItem(item) ;
+        NUM_DIRS++;
 
         if(ui->add_subs->isChecked()){
             // WARNING: can be added multiple times
@@ -89,6 +90,7 @@ void MainWindow::on_add_dir_btn_clicked()
               QTreeWidgetItem *item = new QTreeWidgetItem(ui->dir_info);
               item->setText(0,sub_dir.path());
               ui->dir_info->setCurrentItem(item) ;
+              NUM_DIRS++;
           }
         }
 
@@ -113,6 +115,7 @@ void MainWindow::on_reset_btn_clicked()
     arr_of_maps = new map<int,string>[100];
     arr_of_dirs = new string[100] ;
     MAX_INDEX = 0;
+    NUM_DIRS = 0;
 
     ui->out_tab1->setText("All Cleared successfully.");
     while (!ui->dir_info->selectedItems().isEmpty()){
@@ -314,6 +317,5 @@ void MainWindow::process_from_directory(string path, map <int, string> &mapped_f
         }
 
         ui->progress->setValue(100);
-        ui->out_tab2->append(QString::number(number_of_files));
 }
 
